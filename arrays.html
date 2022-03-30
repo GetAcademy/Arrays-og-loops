@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div id="app"></div>
+    <script>
+        // model
+        let cities = ['Oslo', 'Stockholm', 'København'];
+        let cityName = '';
+        let index = 0;
+
+        updateView();
+        function updateView() {
+            let html = /*html*/`
+                By: <br/>
+                <input type="text" onchange="cityName=this.value; updateView();" value="${cityName}"/>
+                <button onclick="cities.push(cityName);updateView()">Legg til sist i lista</button>
+                <button onclick="cities.unshift(cityName);updateView()">Legg til først i lista</button>
+                <br/>
+                Indeks: <input 
+                    type="range" 
+                    min="0" 
+                    max="${cities.length-1}" 
+                    step="1"
+                    onchange="index=this.valueAsNumber; updateView()"
+                    value="${index}"
+                    /> 
+                ${index}<br/>
+                <button onclick="cities[index]=cityName;updateView()">Bytt ut ut fra index og nytt navn</button>
+                <tt>cities[${index}]='${cityName}'</tt>
+                <hr/>
+                <button onclick="cities.pop(); updateView()">pop</button>
+                <button onclick="cities.shift(); updateView()">shift</button>
+                <hr/>            
+            `;
+            for (i = 0; i < cities.length; i++) {
+            //for (city of cities) {
+                let city = cities[i];
+                html += /*html*/`
+                    <li>
+                        ${city} (index ${i}) 
+                        <button onclick="cities.splice(${i}, 1); updateView()">
+                            x
+                        </button>
+                    </li>
+                    `;
+            }
+            document.getElementById('app').innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

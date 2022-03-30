@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            font-size: 300%;
+        }
+    </style>
+</head>
+
+<body>
+    Start:<br/>
+    <input type="number" onchange="startValue = this.valueAsNumber; doSomething()" />
+    <br/>
+    Endring: <br/>
+    <input type="number" onchange="changeValue = this.valueAsNumber; doSomething()" />
+    <br/>
+    Stopp: <br/>
+    <input type="number" onchange="stopValue = this.valueAsNumber; doSomething()" />
+    <br/>
+
+    <ol id="app"></ol>
+
+    <script>
+        // model
+        let startValue;
+        let changeValue;
+        let stopValue;
+        
+        function doSomething() {        
+            let html = '';
+            let number;
+            for (number = startValue; number <= stopValue; number *= changeValue) {
+                html += `<li>${number}</li>`;                
+            }
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function doSomething3() {        
+            let html = '';
+            let number;
+            for (number = startValue; number <= stopValue; number += changeValue) {
+                html += `<li>${number}</li>`;                
+            }
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function doSomething2() {
+            let number = startValue;
+            let html = '';
+            while (number <= stopValue) {
+                html += `<li>${number}</li>`;
+                number += changeValue;
+            }
+            document.getElementById('app').innerHTML = html;
+        }
+
+    </script>
+</body>
+
+</html>
